@@ -7,8 +7,7 @@ def test_Success_Login(setup):
     page = setup
     loginP = login_page(page)
 
-    page.goto("https://www.saucedemo.com/v1/index.html")
-    loginP.login("standard_user", "secret_sauce")
+    loginP.login(page, "standard_user", "secret_sauce")
     expect(page.locator("text=Products")).to_be_visible()
 
 
@@ -16,7 +15,6 @@ def test_Success_Login(setup):
 def test_Fail_Login(setup):
     page = setup
     loginP = login_page(page)
-
-    page.goto("https://www.saucedemo.com/v1/index.html")
-    loginP.login("locked_out_user", " ")
+    
+    loginP.login(page, "locked_out_user", " ")
     expect(page.locator("text=Epic sadface: Username and password do not match any user in this service")).to_be_visible()
